@@ -2,15 +2,15 @@
 
 This repository implements a **parallel machine scheduling problem** using two approaches:
 
-1. **Heuristic / Dispatching Rule Simulation** — a Python-based scheduler that simulates equipment allocation under capacity and holiday constraints.  
-2. **Gurobi Optimization Model** — an exact MILP formulation to find the optimal schedule.
+1. **Heuristic / Dispatching Rule Simulation**: a Python-based scheduler that simulates equipment allocation under capacity and holiday constraints.  
+2. **Gurobi Optimization Model**: an exact MILP formulation to find the optimal schedule.
 
-The objective is to minimize **order tardiness** while considering:
+The objective is to minimize **order tardiness** while accounting for:
 - Multiple production lines and equipment types  
 - Equipment–bearing mappings  
 - Weekends and Taiwan national holidays  
-- Two-stage process flow (Stage 1 fixed, Stage 2 quantity-dependent)  
-- Parallel production and limited capacity  
+- Two-stage order processing (Stage 1 = fixed time, Stage 2 = quantity-dependent)  
+- Parallel production with limited machine capacity  
 
 ---
 
@@ -24,9 +24,9 @@ The objective is to minimize **order tardiness** while considering:
   - Each equipment (`E`) contains multiple bearings (`P`)  
   - Ensures no overlap in time or capacity  
 
-- **Two-Stage Processing**
-  - Stage 1: fixed-time processing  
-  - Stage 2: quantity-dependent processing (`ceil(q / b)`)  
+- **Order Production Time (Two-Stage Process)**
+  - **Stage 1:** Fixed-time processing  
+  - **Stage 2:** Quantity-dependent processing  
 
 - **Heuristic Scheduling**
   - Uses Python `heapq` for priority scheduling  
@@ -40,6 +40,23 @@ The objective is to minimize **order tardiness** while considering:
 ---
 
 ## Project Structure
+```
+main/
+├── data/
+│   └── order/
+│       └── {order_num}/
+│           ├── quantity.txt
+│           ├── value.txt
+|           ├── order_num.txt
+│           └── due_date.txt
+├── scheduling.ipynb # Gurobi optimization formulation
+├── Dispatching_Rule.ipynb # Heuristic scheduling algorithm
+├── results/
+│   └── result/{order_num}/
+|       ├── scheduling_gurobi_order_{order_num}.xlsx
+│       └── scheduling_algorithm_order_{order_num}.xlsx
+└── README.md
+```
 
 
 ---
