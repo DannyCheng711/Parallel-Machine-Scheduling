@@ -76,3 +76,5 @@ main/
 ---
 
 ## Excel Output Example
+
+![Excel Output](images/scheduling_results.png)
