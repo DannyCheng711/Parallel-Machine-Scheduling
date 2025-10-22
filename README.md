@@ -7,7 +7,6 @@ This repository implements a **parallel machine scheduling problem** using two a
 
 The objective is to minimize **order tardiness** while accounting for:
 - Multiple production lines and equipment types  
-- Equipment–bearing mappings  
 - Weekends and Taiwan national holidays  
 - Two-stage order processing (Stage 1 = fixed time, Stage 2 = quantity-dependent)  
 - Parallel production with limited machine capacity  
@@ -29,8 +28,8 @@ The objective is to minimize **order tardiness** while accounting for:
   - **Stage 2:** Quantity-dependent processing  
 
 - **Heuristic Scheduling**
-  - Uses Python `heapq` for priority scheduling  
-  - Tracks available bearings and updates usage in real time  
+  - Employs a priority queue (heapq) to determine dispatch order
+  - Follows the Largest Processing Time (LPT) rule, giving precedence to orders with higher quantities
 
 - **Excel Visualization**
   - Exports results to Excel (`xlsxwriter`)  
@@ -49,7 +48,7 @@ main/
 │           ├── value.txt
 |           ├── order_num.txt
 │           └── due_date.txt
-├── scheduling.ipynb # Gurobi optimization formulation
+├── Scheduling.ipynb # Gurobi optimization formulation
 ├── Dispatching_Rule.ipynb # Heuristic scheduling algorithm
 ├── results/
 │   └── result/{order_num}/
@@ -62,27 +61,13 @@ main/
 ---
 
 
-## Dispatching Rule Workflow
+## Dispatching Rule Flowchart
 
-1. **Calendar Initialization**
-   - Builds working-day index excluding holidays/weekends  
+![Dispatching Rule Flowchart](images/dispatching_rule_flowchart.png)
 
-2. **Data Loading**
-   - Reads order quantities, values, and due dates  
+---
 
-3. **Equipment Setup**
-   - Defines machine and bearing structure per production line  
-
-4. **Scheduling Loop**
-   - Iterates over orders in a heap queue  
-   - Finds earliest feasible slot and updates usage tables  
-
-5. **Tardiness Calculation**
-   - `tard[k] = max(end_time − due_date[k], 0)`  
-
-6. **Excel Output**
-   - Creates a pandas DataFrame indexed by working day  
-   - Exports formatted schedule with color highlights  
+## Gurobi Optimization Model 
 
 ---
 
