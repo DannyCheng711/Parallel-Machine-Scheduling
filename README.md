@@ -69,6 +69,14 @@ main/
 
 ## Gurobi Optimization Model 
 
+- Objective function
+
+- Constraints
+
+- Variables
+
+The details please refer ... 
+
 ---
 
 ## How to Run 
